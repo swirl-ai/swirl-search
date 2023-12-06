@@ -1,0 +1,23 @@
+{
+    "name": "Discord",
+    "active": true,
+    "default": true,
+    "connector": "Discord",
+    "url": "",
+    "query_template": "Fetch last {limit} messages from channel {channel_id}",
+    "query_processors": [
+        "GenericQueryProcessor"
+    ],
+    "query_mappings": "NOT=True",
+    "result_processors": [
+        "MappingResultProcessor",
+        "CosineRelevancyResultProcessor"
+    ],
+    "response_mappings": "",
+    "result_mappings": "",
+    "results_per_query": 20,
+    "credentials": "add token here",
+    "tags": [
+        "Discord"
+    ]
+}

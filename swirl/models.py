@@ -74,6 +74,8 @@ class SearchProvider(models.Model):
         ('OpenSearch', 'OpenSearch Query String'),
         # Uncomment the line below to enable PostgreSQL
         # ('PostgreSQL', 'PostgreSQL'),
+        #('Qdrant', 'Qdrant'),
+        #('Discord', 'Discord'),
         ('BigQuery', 'Google BigQuery'),
         ('Sqlite3', 'Sqlite3'),
         ('M365OutlookMessages', 'M365 Outlook Messages'),

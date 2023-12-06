@@ -1,0 +1,23 @@
+{
+    "name": "qdrant",
+    "active": true,
+    "default": true,
+    "connector": "Qdrant",
+    "url": "",
+    "query_template": "",
+    "query_processors": [
+        "GenericQueryProcessor"
+    ],
+    "query_mappings": "",
+    "result_processors": [
+        "MappingResultProcessor",
+        "CosineRelevancyResultProcessor"
+    ],
+    "response_mappings": "",
+    "result_mappings": "",
+    "results_per_query": 20,
+    "credentials": "",
+    "tags": [
+        "Qdrant"
+    ]
+}
