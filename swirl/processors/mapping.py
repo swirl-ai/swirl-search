@@ -55,10 +55,13 @@ class MappingResultProcessor(ResultProcessor):
         json_types = [str,int,float,list,dict]
         use_payload = True
         file_system = False
+        event = False
         if 'NO_PAYLOAD' in self.provider.result_mappings:
             use_payload = False
         if 'FILE_SYSTEM' in self.provider.result_mappings:
             file_system = True
+        if 'EVENT' in self.provider.result_mappings:
+            event = True
 
         result_number = 1
         for result in self.results:
@@ -272,6 +275,8 @@ class MappingResultProcessor(ResultProcessor):
             # mark results from SearchProviders with result_mapping FILE_SYSTEM
             if file_system:
                 swirl_result['_relevancy_model'] = 'FILE_SYSTEM'
+            if event:
+                swirl_result['_relevancy_model'] = 'EVENT'
             swirl_result['searchprovider'] = self.provider.name
             list_results.append(swirl_result)
             result_number = result_number + 1
