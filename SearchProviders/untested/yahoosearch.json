@@ -1,0 +1,26 @@
+{
+    "name": "Yahoo Search",
+    "active": false,
+    "default": true,
+    "connector": "yahoosearch",
+    "url": "",
+    "query_template": "",
+    "query_processors": [
+        "AdaptiveQueryProcessor",
+        "MappingResultProcessor",
+        "CosineRelevancyResultProcessor"
+    ],
+    "query_mappings": "p='{query_to_provider}'",
+    "result_processors": [
+        "GenericResultProcessor"
+    ],
+    "response_mappings": "RESULTS=body",
+    "result_mappings": "title=title,body=body,author=author,date_published=date_published",
+    "results_per_query": 10,
+    "credentials": "your-serpapi-API-key-here",
+    "tags": [
+        "Yahoo",
+        "Query",
+        "SearchEngine"
+    ]
+}
