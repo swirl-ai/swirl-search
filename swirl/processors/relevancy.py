@@ -412,6 +412,7 @@ class CosineRelevancyPostResultProcessor(PostResultProcessor):
                     relevancy_model = item['_relevancy_model']
                     del item['_relevancy_model']
                 fs_flag_boost_body = False
+                fs_flag_boost_title = False
                 if relevancy_model:
                     if relevancy_model == 'FILE_SYSTEM':
                         # if title has no matches, and body does, copy body to title; delete it from explain
@@ -421,6 +422,14 @@ class CosineRelevancyPostResultProcessor(PostResultProcessor):
                                 if len(item['body']) > 0:
                                     # match on body, none on title -> use title boost on body
                                     fs_flag_boost_body = True
+                    if relevancy_model == 'EVENT':
+                        # if body has no matches, and title does, use 2 x title; delete it from explain
+                        if not 'body' in dict_score:
+                            # no matches on body
+                            if 'title' in dict_score:
+                                if len(item['title']) > 0:
+                                    # match on title, none on body -> use title boost x2
+                                    fs_flag_boost_title= True
                 # score the item
                 dict_len_adjust = {}
                 for f in dict_score:
@@ -432,6 +441,12 @@ class CosineRelevancyPostResultProcessor(PostResultProcessor):
                                     weight = RELEVANCY_CONFIG['title']['weight']
                                 else:
                                     self.warning(f"title field missing when applying relevancy model: FILE_SYSTEM")
+                        if f == 'title':
+                            if fs_flag_boost_title:
+                                if 'title' in RELEVANCY_CONFIG:
+                                    weight = RELEVANCY_CONFIG['title']['weight'] * 2.0
+                                else:
+                                    self.warning(f"title field missing when applying relevancy model: EVENT")
                     else:
                         continue
                     len_adjust = float(dict_len_median[f] / dict_len[f])
